@@ -22,7 +22,7 @@
     <div class="form-group form-check">
         <input name="active" type="checkbox" {{ $todo->active ? 'checked' : '' }} class="form-check-input"
             id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1" aria-describedby="activeHelp">Activo</label>
-        <small id="activeHelp" class="form-text text-muted">Seleccione el estado de la tarea.</small>
+        <label class="form-check-label" for="exampleCheck1" aria-describedby="activeHelp">Realizada</label>
+        <small id="activeHelp" class="form-text text-muted">Seleccione si la tarea ya fue realizada de lo contrario no lo marque.</small>
     </div>
 </div>
