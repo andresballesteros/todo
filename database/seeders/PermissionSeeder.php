@@ -23,14 +23,14 @@ class PermissionSeeder extends Seeder
         
         //Crear usuarios
         DB::table('permissions')->insert([
-            'name' => 'Crear  usuarios',
+            'name' => 'Crear usuarios',
             'guard_name' => 'web',
             'description' => 'Permiso para crear usuarios'
         ]);
         
         //Actualizar usuarios
         DB::table('permissions')->insert([
-            'name' => 'Actualizar  usuarios',
+            'name' => 'Actualizar usuarios',
             'guard_name' => 'web',
             'description' => 'Permiso para actualizar usuarios'
         ]);
@@ -51,7 +51,7 @@ class PermissionSeeder extends Seeder
         
         //Actualizar roles
         DB::table('permissions')->insert([
-            'name' => 'Actualizar  roles',
+            'name' => 'Actualizar roles',
             'guard_name' => 'web',
             'description' => 'Permiso para actualizar roles'
         ]);

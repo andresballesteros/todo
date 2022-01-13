@@ -25,7 +25,7 @@ class CreateTodosTable extends Migration
         Schema::create('observaciones_todo', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('todo_id');
-            $table->foreign('todo_id')->references('id')->on('todos');
+            $table->foreign('todo_id')->references('id')->on('todos')->onDelete('cascade');
             $table->string('observacion');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');    
