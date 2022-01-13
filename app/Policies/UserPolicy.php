@@ -55,7 +55,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        if ($model->id === 1 || $model->id === 2) {
+        if ($model->id === 1) {
             return false;
         }
         return $user->hasPermissionTo('Actualizar usuarios')

@@ -65,8 +65,7 @@
                                 @if ((auth()->user()->hasPermissionTo('Actualizar usuarios') ||
             auth()->user()->hasRole('admin') ||
             auth()->user()->hasRole('super-admin')) &&
-        $usuario->id !== 1 &&
-        $usuario->id !== 2)
+        $usuario->id !== 1)
 
                                     <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-sm btn-secondary"
                                         title="Editar usuario">

@@ -18,12 +18,14 @@ class UserSeeder extends Seeder
     {
         //Datos para iniciar sesión en el sistema la primera vez
         DB::table('users')->insert([
-            'name' => Str::random(10),
+            'name' => 'Admin',
             'email' => 'admin@unir.com',
             'password' => Hash::make('password'),
             'active' => 1,
             'creator_user_id' => 1,
-            'updater_user_id' => 1
+            'updater_user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
