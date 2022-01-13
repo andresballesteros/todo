@@ -1,20 +1,25 @@
+{{-- Vista para la creación de tareas --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="{{route('usuarios.index')}}">Usuarios</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
     <li class="breadcrumb-item active" aria-current="page">Crear Usuario</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>CREAR USUARIO</h2>
     </div>
 
-    <form id="userCreateForm" action="{{ route('usuarios.store') }}" method="POST" class="form" autocomplete="off">
+    <form id="userCreateForm" action="{{ route('usuarios.store') }}" method="POST" class="form"
+        autocomplete="off">
+        {{-- token csfr necesario para el envío del formulario --}}
         @csrf
 
         <div class="row justify-content-center">
+            {{-- se agrega el template del formulario para los usuarios --}}
             @include('usuarios.form')
             <div class="col-md-8 my-3 text-center">
                 <button type="button" data-toggle="modal" data-target="#confirmDialog"
@@ -23,18 +28,21 @@
             </div>
         </div>
     </form>
-
+    {{-- Se incluye el cuadro de dialogo para la confirmación del envío del formulario --}}
     @include('partials.confirm-dialog',['mensaje'=>'¿Desea crear este usuario?','formId'=>'userCreateForm'])
 
 @endsection
 
 @push('styles')
+    {{-- se agregan los estilos del datatable --}}
     @include('datatable.styles')
 @endpush
 
 @push('scripts')
+    {{-- se incluyen los scripts necesarios para el datatable --}}
     @include('datatable.scripts')
     <script>
+        /* configuracion del datatable*/
         var jqDataTable = $.noConflict(true);
         jqDataTable(function() {
             jqDataTable("#tabla").DataTable({
@@ -71,6 +79,5 @@
                 "buttons": false,
             });
         });
-
     </script>
 @endpush

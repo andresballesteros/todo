@@ -1,10 +1,12 @@
+{{-- Vista principal de roles --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item active" aria-current="page">Roles</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>ROLES</h2>
@@ -16,10 +18,14 @@
     <div class="row justify-content-center">
 
         <div class="col-md-8 my-3">
-            @if(auth()->user()->hasPermissionTo('Crear roles') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('super-admin'))
-            <a href="{{ route('roles.create') }}" class="btn btn-primary float-right btn-crear">Crear Rol<i
-                    class="fa fa-plus"></i>
-            </a>
+            {{-- condición de renderizado para el boton de creación --}}
+            @if (auth()->user()->hasPermissionTo('Crear roles') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
+                {{-- boton para la creación de los roles --}}
+                <a href="{{ route('roles.create') }}" class="btn btn-primary float-right btn-crear">Crear Rol<i
+                        class="fa fa-plus"></i>
+                </a>
             @endif
 
         </div>
@@ -39,6 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- se recorre la variable roles para visualizar todos los roles de la base --}}
                     @foreach ($roles as $role)
 
                         <tr>
@@ -48,28 +55,36 @@
                             <td>{{ $role->getPermissionNames()->implode(', ') }}</td>
                             <td>{{ $role->created_at->format('d/m/Y') }}</td>
                             <td>
-                                @if(auth()->user()->hasPermissionTo('Ver roles') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('super-admin'))
-                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-sm btn-primary" title="Ver rol">
+                                {{-- se implementa los botones de las acciones con sus respectivas restricciones --}}
+                                @if (auth()->user()->hasPermissionTo('Ver roles') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
+                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-sm btn-primary"
+                                        title="Ver rol">
                                         <i class="fa fa-eye">
                                         </i>
                                     </a>
                                 @endif
-                                @if(auth()->user()->hasPermissionTo('Actualizar roles') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('super-admin'))
-                                @if ($role->id !== 1 && $role->id !== 2)
-                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-sm btn-secondary"
-                                        title="Editar rol">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
+                                @if (auth()->user()->hasPermissionTo('Actualizar roles') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
+                                    @if ($role->id !== 1 && $role->id !== 2)
+                                        <a href="{{ route('roles.edit', $role) }}" class="btn btn-sm btn-secondary"
+                                            title="Editar rol">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                    @endif
                                 @endif
-                                @endif
-                                @if(auth()->user()->hasPermissionTo('Eliminar roles') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('super-admin'))
+                                @if (auth()->user()->hasPermissionTo('Eliminar roles') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
                                     @if ($role->id !== 1 && $role->id !== 2)
                                         <a class="btn btn-sm btn-danger" title="Eliminar rol" data-toggle="modal"
                                             data-target="#confirmDialog">
                                             <i class="fa fa-times"></i>
                                         </a>
-                                        <form id="roleDeleteForm" action="{{ route('roles.destroy', $role) }}" method="POST"
-                                            style="display: inline-block">
+                                        <form id="roleDeleteForm" action="{{ route('roles.destroy', $role) }}"
+                                            method="POST" style="display: inline-block">
                                             @csrf @method('DELETE')
                                         </form>
                                     @endif
@@ -77,6 +92,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    {{-- Se incluye el cuadro de dialogo para la confirmación del envío del formulario --}}
                     @include('partials.confirm-dialog',['mensaje'=>'¿Desea eliminar este rol?','formId'=>'roleDeleteForm'])
                 </tbody>
 
@@ -90,12 +106,15 @@
 @endsection
 
 @push('styles')
+    {{-- se agregan los estilos del datatable --}}
     @include('datatable.styles')
 @endpush
 
 @push('scripts')
+    {{-- se incluyen los scripts necesarios para el datatable --}}
     @include('datatable.scripts')
     <script>
+        /* configuracion del datatable */
         var jqDataTable = $.noConflict(true);
         jqDataTable(function() {
             jqDataTable("#tabla").DataTable({
@@ -149,7 +168,6 @@
             }).buttons().container().appendTo('#tabla_wrapper .col-md-5:eq(0)');
 
         });
-
     </script>
 
 @endpush

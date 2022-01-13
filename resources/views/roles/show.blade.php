@@ -1,11 +1,13 @@
+{{-- Vista de información del rol --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ver Rol</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>VER ROL</h2>
@@ -25,6 +27,7 @@
                         <textarea class="form-control" style="resize: none"
                             readonly>{{ $role->getPermissionNames()->implode(', ') }}</textarea>
                     </div>
+                    {{-- validacion de permisos para el renderizado del boton de creación de roles --}}
                     @if ((auth()
             ->user()
             ->hasPermissionTo('Actualizar roles') ||

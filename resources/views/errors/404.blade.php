@@ -1,3 +1,4 @@
+{{-- pagina no encontrada --}}
 @extends('template')
 
 @section('title', 'Eror 404')

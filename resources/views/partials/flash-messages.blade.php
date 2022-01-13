@@ -1,3 +1,4 @@
+{{-- Mensajes de confirmación --}}
 @if (session()->has('flash'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('flash') }}

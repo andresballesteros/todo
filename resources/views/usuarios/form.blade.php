@@ -1,4 +1,6 @@
+{{-- Template del formulario para la creación y actualización de usuarios --}}
 <div class="col-md-8">
+    {{-- se incluye la el código para la presentacion de los mensajes de error --}}
     @include('partials.validation-errors')
 </div>
 <div class="col-md-8">
@@ -27,9 +29,9 @@
         @else
             <small id="nameHelp" class="form-text text-muted">Nombre del usuario</small>
         @enderror
-    </div>   
-    
-       @if (Route::current()->getName() == 'usuarios.edit')
+    </div>
+
+    @if (Route::current()->getName() == 'usuarios.edit')
         <div class="form-group form-check">
             <input name="active" type="checkbox" {{ $usuario->active ? 'checked' : '' }} class="form-check-input"
                 id="exampleCheck1">
@@ -81,6 +83,7 @@
             </tr>
         </thead>
         <tbody>
+            {{-- se recorre la variable roles para obtener todos los roles disponibles --}}
             @foreach ($roles as $rol)
                 <tr>
                     <td><input name="roles[]" class="form-check-input" type="checkbox" value="{{ $rol->name }}"

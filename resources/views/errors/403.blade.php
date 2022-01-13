@@ -1,3 +1,4 @@
+{{-- pagina no autorizada --}}
 @extends('template')
 
 @section('title', 'Eror 404')

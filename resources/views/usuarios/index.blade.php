@@ -1,10 +1,12 @@
+{{-- Vista principal de usuarios --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>USUARIOS</h2>
@@ -16,15 +18,10 @@
     <div class="row justify-content-center">
 
         <div class="col-md-8 my-3">
-            @if (auth()
-            ->user()
-            ->hasPermissionTo('Crear usuarios') ||
-        auth()
-            ->user()
-            ->hasRole('admin') ||
-        auth()
-            ->user()
-            ->hasRole('super-admin'))
+            {{-- validacion de permisos para el renderizado del boton de creación de roles --}}
+            @if (auth()->user()->hasPermissionTo('Crear usuarios') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
                 <a href="{{ route('usuarios.create') }}" class="btn btn-primary float-right btn-crear">Crear Usuario<i
                         class="fa fa-plus"></i>
                 </a>
@@ -45,6 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- Se recorre la variable $usuarios para obtener todos los usuarios registrados en base --}}
                     @foreach ($usuarios as $usuario)
 
                         <tr>
@@ -54,30 +52,19 @@
                             <td>{{ $usuario->active ? 'ACTIVO' : 'INACTIVO' }}</td>
                             <td>{{ $usuario->created_at->format('d/m/Y') }}</td>
                             <td>
-                                @if (auth()
-            ->user()
-            ->hasPermissionTo('Ver usuarios') ||
-        auth()
-            ->user()
-            ->hasRole('admin') ||
-        auth()
-            ->user()
-            ->hasRole('super-admin'))
+                                {{-- validacion de permisos para el renderizado de los botones de acción --}}
+                                @if (auth()->user()->hasPermissionTo('Ver usuarios') ||
+        auth()->user()->hasRole('admin') ||
+        auth()->user()->hasRole('super-admin'))
                                     <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-sm btn-primary"
                                         title="Ver usuario">
                                         <i class="fa fa-eye">
                                         </i>
                                     </a>
                                 @endif
-                                @if ((auth()
-            ->user()
-            ->hasPermissionTo('Actualizar usuarios') ||
-            auth()
-                ->user()
-                ->hasRole('admin') ||
-            auth()
-                ->user()
-                ->hasRole('super-admin')) &&
+                                @if ((auth()->user()->hasPermissionTo('Actualizar usuarios') ||
+            auth()->user()->hasRole('admin') ||
+            auth()->user()->hasRole('super-admin')) &&
         $usuario->id !== 1 &&
         $usuario->id !== 2)
 
@@ -101,12 +88,15 @@
 @endsection
 
 @push('styles')
+    {{-- se agregan los estilos del datatable --}}
     @include('datatable.styles')
 @endpush
 
 @push('scripts')
+    {{-- se incluyen los scripts necesarios para el datatable --}}
     @include('datatable.scripts')
     <script>
+        /* configuracion del datatable*/
         var jqDataTable = $.noConflict(true);
         jqDataTable(function() {
             jqDataTable("#tabla").DataTable({
@@ -146,7 +136,6 @@
             }).buttons().container().appendTo('#tabla_wrapper .col-md-5:eq(0)');
 
         });
-
     </script>
 
 @endpush

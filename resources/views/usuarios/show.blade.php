@@ -1,11 +1,13 @@
+{{-- Vista que presenta la informacion de un usuario --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ver Usuario</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>USUARIO</h2>

@@ -1,15 +1,18 @@
+{{-- Vista del perfil de usuarios --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item active" aria-current="page">Perfil</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
 
     <div class="tituloMorado" style="width: 100%">
         <h2>TU PERFIL</h2>
     </div>
+    {{-- se incluye la el código para la presentacion de los mensajes de error --}}
     @include('partials.validation-errors')
     <div class="row justify-content-center userShow">
 
@@ -31,6 +34,7 @@
         </div>
         <div class="col-md-4">
             <div class="card h-100">
+                {{-- formulario para el cambio de contraseña --}}
                 <div class="card-header">Cambia tu contraseña aquí</div>
                 <div class="card-body">
                     <form id="updatePasswordForm" action="{{ route('user.updatePassword', $usuario) }}" method="post">
@@ -71,6 +75,7 @@
                             </button>
                         </div>
                     </form>
+                    {{-- Se incluye el cuadro de dialogo para la confirmación del envío del formulario --}}
                     @include('partials.confirm-dialog',['mensaje'=>'¿Deseas cambiar tu
                     contraseña?','formId'=>'updatePasswordForm'])
                 </div>

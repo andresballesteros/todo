@@ -1,17 +1,22 @@
+{{-- Vista para la actualización de roles --}}
+{{-- Se llama el template a usar --}}
 @extends('template')
-
+{{-- Se agrega la miga de pan --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
     <li class="breadcrumb-item active" aria-current="page">Editar Rol</li>
 @endsection
-
+{{-- se agrega el contenido principal de la vista --}}
 @section('content')
     <div class="tituloMorado" style="width: 100%">
         <h2>EDITAR ROL</h2>
     </div>
 
-    <form id="roleEditForm" action="{{ route('roles.update', $role) }}" method="POST" class="form" autocomplete="off">
+    <form id="roleEditForm" action="{{ route('roles.update', $role) }}" method="POST" class="form"
+        autocomplete="off">
+        {{-- token csfr necesario para el envío del formulario --}}
+        {{-- se agrega el metodo put al tratarse de una actualización --}}
         @csrf @method('PUT')
         <input type="hidden" name="selected" id="selected">
         <div class="row justify-content-center">
@@ -23,18 +28,21 @@
             </div>
         </div>
     </form>
-
+    {{-- Se incluye el cuadro de dialogo para la confirmación del envío del formulario --}}
     @include('partials.confirm-dialog',['mensaje'=>'¿Desea actualizar este rol?','formId'=>'roleEditForm'])
 
 @endsection
 
 @push('styles')
+    {{-- se agregan los estilos del datatable --}}
     @include('datatable.styles')
 @endpush
 
 @push('scripts')
+    {{-- se incluyen los scripts necesarios para el datatable --}}
     @include('datatable.scripts')
     <script>
+        /* configuracion del datatable */
         var jqDataTable = $.noConflict(true);
         jqDataTable.fn.dataTable.ext.order['dom-checkbox'] = function(settings, col) {
             return this.api().column(col, {
@@ -84,6 +92,5 @@
         $(".form-check-input").click(function() {
             console.log(this.value);
         });
-
     </script>
 @endpush

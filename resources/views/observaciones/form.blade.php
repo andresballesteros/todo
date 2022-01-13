@@ -1,4 +1,6 @@
+{{-- Template del formulario para la creación y actualización de observaciones --}}
 <div class="col-md-8">
+    {{-- se incluye la el código para la presentacion de los mensajes de error --}}
     @include('partials.validation-errors')
 </div>
 <div class="col-md-8">

@@ -1,3 +1,4 @@
+{{--   plantilla para dialogos de confirmación --}}
   <div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-labelledby="confirmDialogTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

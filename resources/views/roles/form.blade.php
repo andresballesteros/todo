@@ -1,9 +1,12 @@
+{{-- Template del formulario para la creación y actualización de roles --}}
 <div class="col-md-8">
+    {{-- se incluye la el código para la presentacion de los mensajes de error --}}
     @include('partials.validation-errors')
 </div>
 <div class="col-md-8">
     <div class="form-group">
         <label for="name">Nombre</label>
+        {{-- Se valida la ruta actual para el renderizado de los campos --}}
         @if (Route::currentRouteName() == 'roles.create')
 
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
@@ -64,10 +67,11 @@
             </tr>
         </thead>
         <tbody>
+            {{-- se recorre la variable permissions para visualizar todos los permisos --}}
             @foreach ($permissions as $permission)
                 <tr>
-                    <td><input name="permissions[]" data-id="{{ $permission->id }}" class="form-check-input" type="checkbox"
-                            value="{{ $permission->name }}" id="defaultCheck{{ $permission->id }}"
+                    <td><input name="permissions[]" data-id="{{ $permission->id }}" class="form-check-input"
+                            type="checkbox" value="{{ $permission->name }}" id="defaultCheck{{ $permission->id }}"
                             {{ $role->hasPermissionTo($permission->name) || collect(old('permissions'))->contains($permission->name) ? 'checked' : '' }}>
                     </td>
                     <td>{{ $permission->id }}</td>

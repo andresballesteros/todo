@@ -27,10 +27,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-
-Route::post('contact', 'MessageController@store')->name('messages.store');
-
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

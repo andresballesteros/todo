@@ -1,5 +1,5 @@
 @auth
-
+    {{-- Menú y barra de navegación del aplicativo --}}
     <nav class="navbar fixed-top navbar-light  bg-primary shadow-sm justify-content-between">
 
 
@@ -16,6 +16,7 @@
                                     <li class="cheeseburger-menu__menu-list-item cheeseburger-menu__menu-list-item--child">
                                         <a href="/home" class="cheeseburger-menu__menu-list-item-link ">INICIO</a>
                                     </li>
+                                    {{-- se implementa la logica de renderizado de los menús segun los roles y permisos del usuario --}}
                                     @if (auth()->user()->hasPermissionTo('Ver usuarios') ||
         auth()->user()->hasPermissionTo('Ver roles') ||
         auth()->user()->hasRole('admin') ||
@@ -63,8 +64,8 @@
             </div>
         </div>
         <div class="card-header text-center bg-primary border-0">
-            <a href="{{ route('home') }}" class="branding-nav"><img src="" alt="Logo"
-                    class="card-img-top"></a>
+            <a href="{{ route('home') }}" class="branding-nav"><img src="/img/logo.png" alt="Logo" class="card-img-top"
+                    style="width: 75px"></a>
         </div>
         <div class="nav-item dropdown" id="">
 
@@ -77,7 +78,7 @@
                 <a class="dropdown-item" href="{{ route('user.profile') }}">Perfil</a>
 
                 <a class="dropdown-item" href="#" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">Cerrar
+                                        document.getElementById('logout-form').submit();">Cerrar
                     sesión</a>
             </div>
         </div>

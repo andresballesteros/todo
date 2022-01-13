@@ -18478,6 +18478,22 @@ div#recaptcha-element > div {
   margin: 0 auto;
 }
 
+.swal2-title {
+  padding: 0 !important;
+}
+
+.swal2-actions {
+  margin: 0 !important;
+  justify-content: right !important;
+}
+
+.swal2-html-container {
+  margin: 0.5rem !important;
+  padding: 1rem !important;
+  line-height: unset !important;
+  text-align: left !important;
+}
+
 @media only screen and (max-width: 1450px) {
   .videosDiv {
     height: 900px;

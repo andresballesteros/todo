@@ -1,3 +1,4 @@
+{{-- vista del login --}}
 @extends('template')
 
 @section('content')
@@ -6,7 +7,7 @@
             <div class="col-lg-5">
                 <div class="card">
                     <div class="card-header text-center bg-white border-0 mt-3">
-                        <a href="/"><img src="" alt="Logo" class="card-img-top"></a>
+                        <a href="/"><img src="img/logo-1.png" style="width: 100px" alt="Logo" class="card-img-top"></a>
                     </div>
 
                     <div class="card-body">
@@ -37,8 +38,7 @@
                                         <i class="fas fa-key"></i>
                                         <input id="password" type="password"
                                             class="form-control mb-4 @error('password') is-invalid @enderror"
-                                            name="password" autocomplete="current-password"
-                                            placeholder="Contraseña">
+                                            name="password" autocomplete="current-password" placeholder="Contraseña">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
